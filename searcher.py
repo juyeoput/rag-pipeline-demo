@@ -8,7 +8,8 @@ def search(query, chunks, vectors, top_k=2):
     # 검색어 벡터 변환
     query_vector = model.encode([query])
 
-    # 검색어 벡터 vs 모든 청크 벡터 유사도 계산
+    # 검색어 벡터 vs 모든 청크 벡터 유사도 계산, 1대 N 비교
+    # 유사도 점수 5개를 한 번에 돌려줌    
     similarities = cosine_similarity(query_vector, vectors)[0]
 
     ranked = sorted(enumerate(similarities), key=lambda x: x[1], reverse=True)
@@ -21,6 +22,7 @@ def search(query, chunks, vectors, top_k=2):
         print(f"내용: {chunks[idx]['content'][:50]}...")
         print()
 
+# Test
 if __name__ == "__main__":
     chunks = load_and_chunk("guide.txt")
     vectors = embed_chunks(chunks)

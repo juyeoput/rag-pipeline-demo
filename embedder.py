@@ -7,10 +7,11 @@ from chunker import load_and_chunk
 model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 
 def embed_chunks(chunks):
-    texts= [chunk["full"] for chunk in chunks]
+    texts = [chunk["full"] for chunk in chunks]
     vectors = model.encode(texts)
     return vectors
 
+# Test
 if __name__ == "__main__":
     chunks = load_and_chunk("guide.txt")
     vectors = embed_chunks(chunks)

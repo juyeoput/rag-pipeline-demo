@@ -5,11 +5,9 @@ def load_and_chunk(filepath):
         content = f.read()
 
     sections = content.strip().split("\n##")
-    # print(sections)
 
     chunks = []
 
-    # 단락 단위
     for section in sections:
         lines = section.strip().splitlines()
         if not lines:
@@ -26,10 +24,10 @@ def load_and_chunk(filepath):
             })
     return chunks
 
+# 테스트
 if __name__ == "__main__":
     chunks = load_and_chunk("guide.txt")
     for i, chunk in enumerate(chunks):
         print(f"[청크 {i+1}] {chunk['title']}")
         print(f" -> {chunk['content'][:60]}...")
         print()
-
